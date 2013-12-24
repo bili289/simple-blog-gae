@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+  {% block content %}
+  <div class="container">
+    <div class="row>">
+    {% if not user %}
+        <a href="/login" class="btn btn-primary btn-lg active" role="button">Follow</a>
+    {% else %}
+        {% if user_id %}
+            {% if user_id != user.name %}
+              {% if not follow %}
+              <a href="/follow/add/{{user_id}}" class="btn btn-primary btn-lg active" role="button">Follow</a>
+              {% else %}
+              <a href="/follow/remove/{{user_id}}" class="btn btn-danger btn-lg active" role="button">Unfollow</a>
+              {% endif %}
+            {% endif %}
+           
+
+            <br>
+            {% if blogs %}
+              {% for b in blogs %}
+               {{ b.render() | safe }}
+              {% endfor %}
+            {% endif %}
+            {% else %}
+    <div class="alert alert-danger"> User is not found! </div>
+        {% endif %}        
+    
+    {% endif %}
+  </div>
+  
+  </div>
+
+{% endblock %}
+
+ {% block recentpost %} {% endblock %}

@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+
+  {% block content %}
+  <style>
+  .add-comment {
+    max-width: 400px;
+  }
+  .total-comment {
+    font-size: 18px;
+  }
+  </style>
+  <div class="x">
+
+    <div class="entry">
+      <div><h5>{{entry.created.strftime("%b %d, %Y")}}</h5></div>
+      <div><h3><a href="/blog/{{entry.key().id()}}"> {{entry.subject}}</a></h3></div>
+      <pre style="background-color:white;border-style:none;">{{ entry.content|e}}</pre>
+    </div>
+
+    <div class="edit">
+      <a href="/blog/{{entry.key().id()}}/edit" class="btn btn-sm btn-primary active" role="button">Edit</a>
+    </div>
+    <br>
+    <div class="comments">
+      <div class="total-comment">{{ comments.count()}} Comments: </div>
+      {% if comments %} 
+        {% for c in comments %}
+        <br>
+        <div class="comment-athor"> {{c.author}} <strong>@</strong> {{c.created.strftime("%b %d, %Y")}} 
+        <br>
+        <div class="comment-comment">
+          {{ c.comment|safe }}
+        </div>
+      </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="add-comment">
+      <div class="well">
+   <!--      <br> <hr> -->
+        <p> Leave a comment <p>
+                {% if error %}
+          <div class="form-group has-error">
+            <label class="control-label" for="inputError">{{error}}</label>
+            <input type="text" class="form-control" id="inputError">
+          </div>
+     {% endif %}
+        <form role="form" method="post">
+          <div class="form-group">
+            <label for="your-name">Your name</label>
+            <input type="text" name="author" value="{{author}}" class="form-control" id="your-name" placeholder="name">
+          </div>
+          <div class="form-group">
+            <label for="your-name">Comment</label>
+            <textarea type="text" name="comment" class="form-control" rows="3">{{comment}}</textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  {% endblock %}

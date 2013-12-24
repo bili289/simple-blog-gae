@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=”utf-8”> 
+
+  <link rel="stylesheet" href="/static/bootstrap.min.css" type="text/css">
+  <link href="/static/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/static/fonts/glyphicons-halflings-regular.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+</style>
+  {% block head %}
+   <title>Home</title> 
+  {% endblock %}
+
+
+</head>
+
+<body>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+      <!-- Static navbar -->
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <!--     <a class="navbar-brand" href="#">Project name</a> -->
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            {% if not user %}
+            <li class="active"><a href="/" >Home</a></li>
+            {% else %}
+            <li class="active"><a href="/blog">Home</a></li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user %}
+            <li><a href="/blog" class="btn btn-info" role="button">{{user.name}}</a></li>
+              <li><a href="/logout">Logout</a></li>
+              {% block newpost %}
+              <li><a href="/blog/add">New post</a></li>
+              {% endblock %}
+            {% else %}
+              <li><a href="/login">Login</a></li>
+              <li><a href="/registration">Signup</a></li>
+            {% endif %}
+            {% block nav %}
+            {% endblock %}
+
+            
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+  <div class="container">
+    <div class="row-fluid">
+    <div class="col-lg-8"> <!-- main content -->
+      <div class="row">
+      {% block content %}
+        <div class="jumbotron">
+            <h1>Welcome</h1>
+            <p> Use the link on the top right hand side to login or register for an account</p>
+            <p>To visit other user blog page, type in /[user_name] For example /ding </p> 
+        </div>
+       {% endblock %} 
+       </div>   
+      </div>
+
+ 
+    <div class="col-lg-4" style="padding-left:30px"> <!-- side menu and stuff -->
+        <div class="row">
+         <!-- <div class="well"> -->
+        {% block ufollow %}
+          {% if follow_blog_list %}
+            <div class="well">
+              <h4> Blogs you follow</h4>
+              
+                {% for f in range(follow_blog_list|length) %}
+
+                <div><a href="/{{follow_blog_list[f].owner_id}}" style="text-decoration:none;">{{follow_blog_list[f].owner_id}}</a></div>
+                <div><a href="/blog/{{follow_blog_list[f].key().id()}}" style="text-decoration:none;">{{ follow_blog_list[f].subject}}</a></div>
+                <div>{{follow_blog_list[f].created.strftime("%b %d, %Y")}}</div>
+                <br> 
+                  {% endfor %}
+            </div>
+            
+            {% else %}
+            <div class="well">
+            <h4> Blogs you follow</h4>
+            <p> You haven't followed any </p>
+          </div>
+            {% endif %}
+        {% endblock %}
+      <!-- </div> -->
+        </div> <!-- blogs you follow -->
+        {% block recentpost %}
+        <div class="row">
+
+          <div class="well">
+
+           <h4>Your recent post</h4>
+           {% if recent %}
+            {% for r in recent %}
+            <div><a href="/blog/{{r.key().id()}}" style="text-decoration:none;">{{r.subject}}</a></div>
+            <!-- <div>{{r.content}}</div> -->
+            <br>
+            {% endfor %}
+
+           {% endif %}
+           
+          </div>
+        </div>
+        {% endblock %}
+
+        {% block search %}
+        <div class="row">
+          <div class="well">
+            <div>
+              <form class="form" action="/search/name">
+                <input type="text" name="name" value="" class="form-control" placeholder="user name" required autofocus >
+                <br>
+                <button type="submit" class="btn btn-primary">Search</button>
+              </form>
+            </div>
+           
+          </div>
+        </div>
+        {% endblock %}
+
+
+      </div> 
+    </div> <!-- row-fluid -->
+</div> <!-- container -->
+
+</body>
+
+</html>
+

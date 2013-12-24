@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+  {% block head %}
+  <link type="text/css" rel="stylesheet" href="/static/signin.css" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+   <title>Sigin</title> 
+  {% endblock %}
+
+
+  {% block content %}
+
+      <div class="container">
+        {% if error_username %}
+        <div class="form-group has-error">
+    <label class="control-label" for="inputError">{{error_username}}</label>
+    <input type="text" class="form-control" id="inputError">
+  </div>
+   {% endif %}
+      <form class="form-signin" role="form" method="post">
+                {% if user %}
+        <div class="alert alert-warning alert-dismisable">
+          <button type="button" class="close" data-dismiss="alert" aria-hiddel="true">&times;</button
+            <strong>Warning!</strong> You're already logged in! Use menu to go to home page or log out</div>
+        {% endif %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" name="username" value="{{username}}" class="form-control" placeholder="User name" required autofocus >
+        <input type="password" name="password" value="" class="form-control" placeholder="Password" required >
+
+        <!-- <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label> -->
+        <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
+        <!-- <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"> -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div> <!-- /container -->
+  {% endblock %}
+
+  
+  {% block ufollow %} {% endblock %}
+  {% block recentpost %} {% endblock %}
+  {% block search %} {% endblock %}
+ 
+

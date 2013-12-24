@@ -1,0 +1,27 @@
+ <style>
+ .entry-title {
+  font-size: 20px;
+ }
+ .entry-date {
+  font-size: 12px;
+ }
+ </style>
+ <div class="col-lg-8">
+  <div class="entry">
+    <div class="entry-heading">
+
+      <div class="entry-date">
+        {{entry.created.strftime("%b %d, %Y")}}
+      </div>
+
+      <div class="entry-title">
+        <a href="/blog/{{entry.key().id()}}"> {{entry.subject}}</a>
+      </div>
+    </div>
+
+    <div class="entry-content">
+      <pre style="background-color:white;border-style:none;">{{entry.content | e}}</pre>
+    </div>
+    <hr>
+  </div>
+</div>

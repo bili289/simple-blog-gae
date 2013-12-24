@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+  {% block content %}
+  <div class="col-lg-8">
+    <div class="row>">
+    {% if u %}
+    <p>Users found:</p>
+     <p> <a href="/{{u.name}}" class="btn btn-primary btn-lg active" role="button">{{u.name}}</a></p>
+    {% else %}
+    <div class="alert alert-danger"> User, {{query}} is not found! </div>
+    {% endif %}
+  </div>
+  
+  </div>
+
+{% endblock %}
+{% block ufollow %} {% endblock %}
+{% block recentpost %} {% endblock %}

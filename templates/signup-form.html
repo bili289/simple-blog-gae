@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+
+  {% block head %}
+  <link type="text/css" rel="stylesheet" href="/static/signin.css" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+   <title>Sign up</title> 
+  {% endblock %}
+
+
+  {% block content %}
+
+      <div class="container">
+
+      <form class="form-signin" role="form" method="post">
+        <h2 class="form-signin-heading">Registration</h2>
+        {% if user %}
+        <div class="alert alert-warning alert-dismisable">
+          <button type="button" class="close" data-dismiss="alert" aria-hiddel="true">&times;</button>
+            <strong>Warning!</strong> You're already logged in, carry on with registration will log you out.
+          </div>
+        {% endif %}
+        <div class="form-group {% if error_username or error_exists %} has-error {% endif %}">
+          {% if error_username or error_exists %} 
+          {{error_username}}
+          <label class="control-label" for="inputError">{{ error_username }}{{error_exists}}</label>
+          {% endif %}          
+          <input type="text" name="username" value="{{username}}" class="form-control" placeholder="User name" id="{% if error_username %}inputError{% else %}{% endif %}" required autofocus >
+        </div>
+        <div class="form-group {% if error_password %} has-error {% endif %}">
+          {% if error_password %}
+          <label class="control-label" for="inputError">{{error_password}}</label>
+          {% endif %}
+          <input type="password" name="password" value="" class="form-control" placeholder="Password" id="{% if error_password %}inputError{% else %}{% endif %}" required >
+         </div>
+
+        <div class="form-group {% if error_verify %} has-error {% endif %}">
+          {% if error_verify %} 
+          <label class="control-label" for="inputError">{{error_verify}}</label>
+          {% endif %}
+          <input type="password" name="verify" value="" class="form-control" placeholder="{% if error_varify %} Wrong password with confirm {% else %} Password {% endif %}" id="{% if error_varify %}inputError{% else %}{% endif %}" required >
+        </div>
+          
+        <div class="form-group {% if error_email %} has-error {% endif %}">
+          {% if error_email %}
+          <label class="control-label" for="inputError">{{error_email}}</label>
+          {% endif %}
+          <input type="text" name="email" value="{{email}}" class="form-control" placeholder="Email" id="{% if error_email %}inputError{% else %}{% endif %}"  >
+        </div>
+
+        <!-- <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label> -->
+        <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+      </form>
+
+    </div> <!-- /container -->
+  {% endblock %}
+  {% block ufollow %} {% endblock %}
+  {% block recentpost %} {% endblock %}
+  {% block search %} {% endblock %}
+
+

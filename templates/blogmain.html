@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+
+  {% block content %}
+  	  {% for b in blogs %}
+    <!-- <pre style="background-color:white;border-style:none;">{{ b.render() | safe}}</pre> -->
+    {{b.render() | safe}}
+  	{% endfor %}
+  {% endblock %}
+
+
+

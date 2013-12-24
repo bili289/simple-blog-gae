@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+
+{% block head %}
+<title>Edit  </title>
+<style>
+.new-post {
+  max-width: 330px;
+}
+</style>
+{% endblock %}
+
+{% block newpost %}
+<li><a href="/blog">Blog</a></li>
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+     
+   <!--  <div class="row"> -->
+      <form class="new-post" role="form" method="post">
+        <h2>Edit post</h2>
+        <br>
+        {% if error %}
+        <div class="form-group has-error ">
+          <label class="control-label">{{error}}</label>
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+          <label for="subject" class="">Subject</label>
+          <input type="text" name="subject" value="{{blog.subject}}" class="form-control" id="subject" placeholder="Post name">
+        </div>
+
+         <div class="form-group">
+          <label for="content" class="span12">Content</label>
+          <textarea class="form-control" rows="4" name="content">{{blog.content}}</textarea>
+        </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>        
+
+      </form>
+    <!-- </div> -->
+  </div> <!-- /container -->
+
+{% endblock %}
+
+

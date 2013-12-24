@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% for c in comments %}
+    {{ c.render() | safe }}
+    <br><br>
+  {% endfor %}
+
+{% endblock %}
